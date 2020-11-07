@@ -2,11 +2,18 @@ import requests
 import os
 import json
 import smtplib
+import logging
 
 from bs4 import BeautifulSoup
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
+logger = logging.getLogger()
+logger.setLevel(logging.DEBUG)
+FORMAT = "%(asctime)-15s %(message)s"
+logging.basicConfig(format=FORMAT)
+
+logging.info("Starting script")
 # Sender credentials
 EMAIL_USER = os.environ.get("EMAIL_USER")
 EMAIL_PASS = os.environ.get("EMAIL_PASS")
@@ -62,7 +69,7 @@ def send_mail(sender, receiver, subject, body):
     message.attach(content)
 
     server.sendmail(sender, receiver, message.as_string())
-
+    logging.info("Email sent!")
     server.quit()
 
 
@@ -101,6 +108,8 @@ with open("watch_list.json") as json_file:
 
         # Comparing best price with user defined price
         if f_best_price < el["max_price"]:
+            logging.info("Discount found - {}".format(best_offer.name))
+
             mail_body = ""
             with open("index.html", "r") as f:
                 mail_body = str(f.read())
@@ -116,3 +125,5 @@ with open("watch_list.json") as json_file:
                 ),
                 mail_body,
             )
+        else:
+            logging.info("No discount found")
