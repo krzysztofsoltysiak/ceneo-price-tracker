@@ -1,0 +1,24 @@
+{
+    "products": [
+        {
+            "product_id": 85308957,
+            "name": "Nintendo Switch",
+            "max_price": 1200.0
+        },
+        {
+            "product_id": 83815630,
+            "name": "Nintendo Switch Lite",
+            "max_price": 800.0
+        },
+        {
+            "product_id": 35433387,
+            "name": "Sony Alpha A7 II",
+            "max_price": 3500.0
+        },
+        {
+            "product_id": 61132825,
+            "name": "Canon EOS M50",
+            "max_price": 2200.0
+        }
+    ]
+}
